@@ -25,7 +25,7 @@ struct Node {
 };
 
 // Linked list realisation
-class LinkedList{
+class LinkedList {
     public: 
         Node* head;
         Node* tail;
@@ -35,20 +35,18 @@ class LinkedList{
             tail = NULL;
         }
 
-        void pushFront(int key){
+        void pushFront(int key) {
             Node* newNode = new Node;
             newNode->data = key;
             newNode->next = head;
             head = newNode;
-            if (tail == NULL)
-            {
+            if (tail == NULL) {
                 tail = head;
             }
         }
 
-        void popFront(){
-            if (head == NULL)
-            {
+        void popFront() {
+            if (head == NULL) {
                 cout << "ERROR: list is empty\n";
                 return;
             }
@@ -56,45 +54,37 @@ class LinkedList{
             toDelete = head;
             head = head->next;
             delete toDelete;
-            if (head == NULL)
-            {
+            if (head == NULL) {
                 tail = NULL;
             }
         }
-        
-        void pushBack(int key){
+        void pushBack(int key) {
             Node* newNode = new Node;
             newNode->data = key;
             newNode->next = NULL;
-            if (tail == NULL)
-            {
+            if (tail == NULL) {
                 head = newNode;
                 tail = newNode;
             }   
-            else
-            {
+            else {
                 tail->next = newNode;
                 tail = newNode;
             }
         }
 
-        void popBack(){
-            if (head == NULL)
-            {
+        void popBack() {
+            if (head == NULL) {
                 cout << "ERROR: list is empty\n";
                 return;
             }
-            if (head == tail)
-            {
+            if (head == tail) {
                 delete head;
                 head = NULL;
                 tail = NULL;
             }
-            else
-            {
+            else {
                 Node* pop = head;
-                while (pop->next->next != NULL)
-                {
+                while (pop->next->next != NULL) {
                     pop = pop->next;
                 }
                 delete pop->next;
@@ -103,18 +93,15 @@ class LinkedList{
             }
         }
 
-        Node* find(int key){
+        Node* find(int key) {
             Node *currentNode = new Node;
             currentNode = head;
-            if (currentNode == NULL)
-            {
+            if (currentNode == NULL) {
                 cout << "ERROR: list is empty\n";
                 return (Node*)NULL;
             }
-            while (currentNode != NULL)
-            {
-                if (currentNode->data == key)
-                {
+            while (currentNode != NULL) {
+                if (currentNode->data == key) {
                     return currentNode;
                 }
                 currentNode = currentNode->next;
@@ -123,14 +110,12 @@ class LinkedList{
             return (Node*)NULL;
         }
 
-        void erase(int key){
-            if (head == NULL)
-            {
+        void erase(int key) {
+            if (head == NULL) {
                 cout << "ERROR: list is empty\n";
                 return;
             }
-            if (head->data == key)
-            {
+            if (head->data == key) {
                 delete head;
                 head = NULL;
                 tail = NULL;
@@ -140,12 +125,9 @@ class LinkedList{
             Node* currentNode = new Node;
             Node* previousNode = new Node;
             currentNode = head;
-            while (currentNode != NULL)
-            {
-                if (currentNode->data == key)
-                {
-                    if (currentNode->next == NULL)
-                    {
+            while (currentNode != NULL) {
+                if (currentNode->data == key) {
+                    if (currentNode->next == NULL) {
                         tail = previousNode;
                     }
                     previousNode->next = currentNode->next;
@@ -159,21 +141,19 @@ class LinkedList{
             cout << "ERROR: list doesn\'t contain " << key;
         }
 
-        void clear(){
+        void clear() {
             head = NULL;
             tail = NULL;
         }
 
-        void print(){
+        void print() {
             Node *currentNode = new Node;
             currentNode = head;
-            if (currentNode == NULL)
-            {
+            if (currentNode == NULL) {
                 cout << "The linked list is empty\n";
                 return;
             }
-            while (currentNode != NULL)
-            {
+            while (currentNode != NULL) {
                 cout << currentNode->data << ' ';
                 currentNode = currentNode->next;
             }
@@ -182,58 +162,50 @@ class LinkedList{
 };
 
 // Example CLI
-int main(){
+int main() {
     string input;
     LinkedList list;
     cout << "Linked list has been created\n";
     cout << "-: ";
-    while(cin >> input){
-        if (input == "pushFront")
-        {
+    while(cin >> input) {
+        if (input == "pushFront") {
             int key;
             cin >> key;
             list.pushFront(key);
             list.print();
         }
-        else if (input == "popFront")
-        {
+        else if (input == "popFront") {
             list.popFront();
             list.print();
         }
-        else if (input == "popBack")
-        {
+        else if (input == "popBack") {
             list.popBack();
             list.print();
         }
-        else if (input == "pushBack")
-        {
+        else if (input == "pushBack") {
             int key;
             cin >> key;
             list.pushBack(key);
             list.print();
         }
-        else if (input == "erase")
-        {
+        else if (input == "erase") {
             int key;
             cin >> key;
             list.erase(key);
             list.print();
         }
-        else if (input == "find")
-        {
+        else if (input == "find") {
             int key;
             cin >> key;
             Node* result = new Node;
             result = list.find(key);
             cout << &result << '\n';
         }
-        else if (input == "clear") 
-        {
+        else if (input == "clear") {
             list.clear();
             cout << "List has been cleaned\n";
         }        
-        else 
-        {
+        else {
             break;
         }
         cout << "-: ";
