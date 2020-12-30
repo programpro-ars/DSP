@@ -58,6 +58,7 @@ class LinkedList {
                 tail = NULL;
             }
         }
+        
         void pushBack(int key) {
             Node* newNode = new Node;
             newNode->data = key;
