@@ -1,14 +1,14 @@
 // Created by Arseniy Arsentyew <programpro.ars@gmail.com>
 // Sharing with the MIT license
 
-// class Stack:
-//     head - link to the toppest element
-//
-//     push(key) - adds (key) to the stack
-//     pop() - deletes and returnes the toppest element
-//     top() - returnes the toppest element
-//     isEmpty() - returns true if stack is empty
-//     print() - prints a stack
+// class Queue:
+//     head - link to the first element
+//     tail - link to the last element
+//     
+//     enQueue(key) - adds (key) to the queue
+//     deQueue() - deletes and returns the last element
+//     isEmpty() - returns true if queue is empty
+//     print() - prints a queue
 
 #include <bits\stdc++.h>
 
@@ -20,25 +20,20 @@ struct Node {
     struct Node* next;
 };
 
-// Stack realisation
-class Stack {
+// Queue realisation
+class Queue {
     public: 
         Node* head;
+        Node* tail;
 
-        Stack() {
+        Queue() {
             head = NULL;
+            tail = NULL;
         }
 
-        void push(int key) {
-            Node* newNode = new Node;
-            newNode->data = key;
-            newNode->next = head;
-            head = newNode;
-        }
-
-        int pop() {
+        int deQueue() {
             if (head == NULL) {
-                cout << "ERROR: stack is empty\n";
+                cout << "ERROR: queue is empty\n";
                 return -1;
             }
             Node* toDelete = new Node;
@@ -46,15 +41,28 @@ class Stack {
             int toReturn = toDelete->data;
             head = head->next;
             delete toDelete;
+            if (head == NULL) {
+                tail = NULL;
+            }
             return toReturn;
         }
-
-        int top() {
-            return head->data;
+        
+        void enQueue(int key) {
+            Node* newNode = new Node;
+            newNode->data = key;
+            newNode->next = NULL;
+            if (tail == NULL) {
+                head = newNode;
+                tail = newNode;
+            }   
+            else {
+                tail->next = newNode;
+                tail = newNode;
+            }
         }
 
         bool isEmpty(){
-            if (head == NULL) {
+            if (head == NULL){
                 return true;
             }
             return false;
@@ -64,7 +72,7 @@ class Stack {
             Node *currentNode = new Node;
             currentNode = head;
             if (currentNode == NULL) {
-                cout << "The stack is empty\n";
+                cout << "The queue is empty\n";
                 return;
             }
             while (currentNode != NULL) {
@@ -78,25 +86,22 @@ class Stack {
 // Example CLI
 int main() {
     string input;
-    Stack stack;
-    cout << "Stack has been created\n";
+    Queue queue;
+    cout << "Queue has been created\n";
     cout << "-: ";
     while(cin >> input) {
-        if (input == "push") {
+        if (input == "enQueue") {
             int key;
             cin >> key;
-            stack.push(key);
-            stack.print();
+            queue.enQueue(key);
+            queue.print();
         }
-        else if (input == "top") {
-            cout << stack.top() << '\n';
-        }
-        else if (input == "pop") {
-            cout << stack.pop() << '\n';
-            stack.print();
+        else if (input == "deQueue") {
+            cout << queue.deQueue() << '\n';
+            queue.print();
         }
         else if (input == "isEmpty") {
-            bool state = stack.isEmpty();
+            bool state = queue.isEmpty();
             if (state) {
                 cout << "Yes\n";
             }
