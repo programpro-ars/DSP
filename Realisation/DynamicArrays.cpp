@@ -17,7 +17,7 @@
 
 using namespace std;
 
-// DynamicArray realisation
+// Dynamic array realisation
 class DynamicArray {
     public: 
         int size;
